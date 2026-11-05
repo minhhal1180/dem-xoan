@@ -1,0 +1,21 @@
+[Unit]
+Description=Dem Xoan progress API
+After=network.target
+
+[Service]
+User=student
+Group=student
+WorkingDirectory=/home/student/projects/dem-xoan/backend
+EnvironmentFile=/home/student/projects/dem-xoan/backend/api.env
+ExecStart=/usr/bin/python3 /home/student/projects/dem-xoan/backend/server.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/student/.local/share/dem-xoan
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

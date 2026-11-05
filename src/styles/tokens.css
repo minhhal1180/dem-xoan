@@ -1,0 +1,39 @@
+/* Design system: docs/UX-UI-STANDARD.md. Shared semantic tokens only. */
+:root {
+  --primary: #a24f37;
+  --primary-hover: #833d2a;
+  --primary-soft: #f4e9e2;
+  --night: #142c35;
+  --night-deep: #10232c;
+  --gold: #d9b675;
+  --gold-dark: #8a692e;
+  --bg: #f7f6f1;
+  --surface: #fffefa;
+  --surface-alt: #eeeee5;
+  --ink: #263c40;
+  --ink-2: #4a5a58;
+  --muted: #626a60;
+  --line: #e3e3d8;
+  --success: #42654f;
+  --success-soft: #e9efe6;
+  --danger: #a03332;
+  --danger-soft: #faefec;
+  --font-sans: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
+  --font-display: 'Lora', Georgia, 'Times New Roman', serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --shadow: 0 6px 24px #142c3508;
+  --shadow-pop: 0 16px 60px #10232c25;
+  --sidebar-width: 236px;
+  --focus: #98691e;
+}

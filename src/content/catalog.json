@@ -1,0 +1,42 @@
+[
+  {
+    "id": "unesco-xoan",
+    "title": "Hát Xoan Phú Thọ — di sản của cộng đồng",
+    "kind": "article",
+    "author": "UNESCO Intangible Cultural Heritage",
+    "sourceUrl": "https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260",
+    "rights": "Dẫn nguồn để tìm hiểu; không phân phối lại nội dung gốc.",
+    "reviewed": true,
+    "version": 1
+  },
+  {
+    "id": "hatxoan-photo",
+    "title": "Hoạt động Hát Xoan tại Việt Trì",
+    "kind": "image",
+    "author": "Tungdino1997",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hatxoan.jpg",
+    "rights": "CC BY-SA 4.0. Ảnh giữ nguyên, chỉ điều chỉnh cách hiển thị bằng CSS. https://creativecommons.org/licenses/by-sa/4.0/",
+    "reviewed": true,
+    "version": 1
+  },
+  {
+    "id": "unesco-video",
+    "title": "Xoan singing of Phú Thọ province, Viet Nam",
+    "kind": "video",
+    "author": "VietPicture Media; Sở Văn hóa, Thể thao và Du lịch Phú Thọ / UNESCO",
+    "sourceUrl": "https://www.unesco.org/archives/multimedia/document-4653",
+    "rights": "Chỉ xem tại nguồn. Cần liên hệ chủ sở hữu về quyền tải, biên tập và tái sử dụng.",
+    "reviewed": true,
+    "version": 1
+  },
+  {
+    "id": "generated-exercises",
+    "title": "Ba bài luyện nhịp và cao độ",
+    "kind": "exercise",
+    "author": "Dự án Đêm Xoan Không Tắt",
+    "sourceUrl": "",
+    "rights": "Âm tổng hợp bằng Web Audio. Bài luyện minh họa, không phải câu Hát Xoan.",
+    "reviewed": true,
+    "version": 1
+  }
+]
