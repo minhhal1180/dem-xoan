@@ -136,7 +136,7 @@ export default function Prepare() {
               >
                 <Glasses size={29} />
                 <strong>{sensorBusy ? 'Đang kiểm tra…' : 'Với kính giấy'}</strong>
-                <span className="muted">Android có cảm biến · Xoay ngang</span>
+                <span className="muted">Android / iPhone có cảm biến · Xoay ngang</span>
               </button>
             </div>
             <p className="small muted">

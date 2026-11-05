@@ -42,6 +42,6 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
-    build: { emptyOutDir: true, chunkSizeWarningLimit: 700 },
+    build: { emptyOutDir: true, assetsInlineLimit: 0, chunkSizeWarningLimit: 700 },
   }
 })

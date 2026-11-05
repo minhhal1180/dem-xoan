@@ -198,7 +198,10 @@ export default function Practice() {
     setSensorBusy(true)
     setError('')
     try {
-      const ok = await requestSensors()
+      // Start both permission-sensitive operations inside the original tap.
+      const audioReady = engine.current.unlock()
+      const sensorReady = requestSensors()
+      const [ok] = await Promise.all([sensorReady, audioReady])
       if (!mounted.current) return
       if (!ok) throw new Error('Chưa có dữ liệu cảm biến. Hãy tiếp tục với chế độ màn hình.')
       await engine.current.openMicrophone()

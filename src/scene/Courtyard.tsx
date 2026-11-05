@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { StereoEffect } from 'three/addons/effects/StereoEffect.js'
+import { hasOrientationData, screenAngle } from './sensors'
 import type { DisplayMode, Phase } from '../types'
 
 export type SceneCommand = 'sample' | 'record' | 'replay' | 'recenter' | 'exit'
@@ -31,96 +32,56 @@ export default function Courtyard({ mode, phase, caption, onCommand, onError }: 
     renderer.setClearColor('#122c35')
     container.appendChild(renderer.domElement)
     const scene = new THREE.Scene()
-    scene.fog = new THREE.Fog('#122c35', 15, 48)
     const camera = new THREE.PerspectiveCamera(68, 1, 0.1, 70)
     camera.position.set(0, 1.65, 6)
     const stereo = new StereoEffect(renderer)
     stereo.setEyeSeparation(0.064)
-    scene.add(new THREE.HemisphereLight('#d9e9e6', '#473626', 2.7))
-    const warm = new THREE.PointLight('#ffc47a', 60, 17)
-    warm.position.set(0, 4, 0)
-    scene.add(warm)
-    const mat = (color: string) => new THREE.MeshLambertMaterial({ color })
-    const wood = mat('#966b46'),
-      roof = mat('#34545a'),
-      brick = mat('#846755')
-    function box(
-      w: number,
-      h: number,
-      d: number,
-      x: number,
-      y: number,
-      z: number,
-      material: THREE.Material,
-    ) {
-      const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), material)
-      mesh.position.set(x, y, z)
-      scene.add(mesh)
-      return mesh
-    }
-    box(30, 0.15, 30, 0, -0.15, -2, mat('#384b4d'))
-    const grid = new THREE.GridHelper(28, 28, '#6b7970', '#4b6260')
-    grid.position.y = -0.06
-    scene.add(grid)
-    box(12, 0.4, 5, 0, 0.1, -4, brick)
-    box(10, 3, 3, 0, 1.8, -5, mat('#3a3a30'))
-    for (const x of [-4.6, -2.2, 2.2, 4.6]) box(0.22, 3.2, 0.24, x, 1.8, -3.1, wood)
-    const r1 = box(12, 0.22, 5.2, 0, 3.55, -4.5, roof)
-    r1.rotation.x = 0.04
-    const ridge = new THREE.Mesh(new THREE.ConeGeometry(7, 1.6, 4), roof)
-    ridge.rotation.y = Math.PI / 4
-    ridge.scale.z = 0.55
-    ridge.position.set(0, 4.2, -4.5)
-    scene.add(ridge)
-    box(3, 0.18, 2.3, 0, 4.9, -4.5, roof)
-    for (const x of [-3.5, 3.5])
-      for (let j = 0; j < 7; j++) box(0.055, 2, 0.06, x - 0.7 + j * 0.22, 1.85, -3.48, wood)
-    box(1.8, 2.8, 0.12, 0, 1.65, -3.46, mat('#14292d'))
-    box(3, 0.33, 0.08, 0, 3.05, -3.1, mat('#b8935b'))
-    const moon = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 20, 12),
-      new THREE.MeshBasicMaterial({ color: '#ead3a0' }),
-    )
-    moon.position.set(9, 9, -17)
-    scene.add(moon)
-    const stars = new Float32Array(90)
-    for (let i = 0; i < 30; i++) {
-      stars[i * 3] = Math.sin(i * 127.1) * 22
-      stars[i * 3 + 1] = 6 + (i % 9)
-      stars[i * 3 + 2] = -10 - (i % 7) * 3
-    }
-    const starGeo = new THREE.BufferGeometry()
-    starGeo.setAttribute('position', new THREE.BufferAttribute(stars, 3))
-    scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: '#d2d9ba', size: 0.06 })))
-    for (const x of [-5, -2.5, 2.5, 5]) {
-      const lantern = new THREE.Mesh(
-        new THREE.SphereGeometry(0.2, 12, 8),
-        new THREE.MeshBasicMaterial({ color: '#db9b57' }),
+    const textures: THREE.Texture[] = []
+    let disposed = false
+    const loader = new THREE.TextureLoader()
+    function artwork(name: string, ready: (texture: THREE.Texture) => void) {
+      const texture = loader.load(
+        `${import.meta.env.BASE_URL}media/generated/${name}.webp`,
+        (loaded) => {
+          if (disposed) {
+            loaded.dispose()
+            return
+          }
+          loaded.colorSpace = THREE.SRGBColorSpace
+          ready(loaded)
+        },
+        undefined,
+        () => {
+          if (!disposed) onError()
+        },
       )
-      lantern.scale.y = 1.4
-      lantern.position.set(x, 3.2, 0)
-      scene.add(lantern)
-      box(0.025, 0.7, 0.025, x, 3.75, 0, wood)
+      textures.push(texture)
     }
-    function person(x: number, color: string) {
-      const body = new THREE.Mesh(new THREE.ConeGeometry(0.34, 1.25, 10), mat(color))
-      body.position.set(x, 0.7, -1)
-      scene.add(body)
-      const head = new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 10), mat('#d5af82'))
-      head.position.set(x, 1.55, -1)
-      scene.add(head)
-      const hat = new THREE.Mesh(
-        new THREE.SphereGeometry(0.2, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2),
-        mat('#25383a'),
-      )
-      hat.position.set(x, 1.64, -1)
-      scene.add(hat)
-      const arm = box(0.13, 0.65, 0.14, x + 0.35, 1, -1, mat(color))
-      arm.rotation.z = 0.8
+    // Generated artwork is an illustrated environment, not a heritage reconstruction.
+    artwork('environment', (texture) => {
+      texture.mapping = THREE.EquirectangularReflectionMapping
+      scene.background = texture
+      scene.backgroundRotation.y = Math.PI / 2
+    })
+    for (const [name, x] of [
+      ['kep', -2.4],
+      ['dao', 2.4],
+    ] as const) {
+      artwork(name, (texture) => {
+        const guide = new THREE.Mesh(
+          new THREE.PlaneGeometry(1.8, 2.7),
+          new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            depthWrite: false,
+            side: THREE.DoubleSide,
+            alphaTest: 0.02,
+          }),
+        )
+        guide.position.set(x, 1.35, 0.5)
+        scene.add(guide)
+      })
     }
-    person(-0.7, '#c08051')
-    person(0.7, '#a75248')
-    const textures: THREE.CanvasTexture[] = []
     function label(text: string, width = 1024, height = 160) {
       const canvas = document.createElement('canvas')
       canvas.width = width
@@ -187,6 +148,7 @@ export default function Courtyard({ mode, phase, caption, onCommand, onError }: 
       yaw = 0,
       pitch = 0,
       drag = false,
+      moved = false,
       px = 0,
       py = 0
     let rawQuat: THREE.Quaternion | null = null,
@@ -197,13 +159,13 @@ export default function Courtyard({ mode, phase, caption, onCommand, onError }: 
       q1 = new THREE.Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)),
       axis = new THREE.Vector3(0, 0, 1)
     function orientation(e: DeviceOrientationEvent) {
-      if (e.alpha === null || e.beta === null || e.gamma === null) return
+      if (!hasOrientationData(e) || e.alpha === null || e.beta === null || e.gamma === null) return
       const deg = THREE.MathUtils.degToRad
       sensorEuler.set(deg(e.beta), deg(e.alpha), -deg(e.gamma), 'YXZ')
       rawQuat = new THREE.Quaternion()
         .setFromEuler(sensorEuler)
         .multiply(q1)
-        .multiply(screenQuat.setFromAxisAngle(axis, -deg(screen.orientation?.angle || 0)))
+        .multiply(screenQuat.setFromAxisAngle(axis, -deg(screenAngle())))
       if (!offset) {
         const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(rawQuat)
         offset = new THREE.Quaternion().setFromAxisAngle(
@@ -223,12 +185,14 @@ export default function Courtyard({ mode, phase, caption, onCommand, onError }: 
     }
     function down(e: PointerEvent) {
       drag = true
+      moved = false
       px = e.clientX
       py = e.clientY
       renderer.domElement.setPointerCapture(e.pointerId)
     }
     function move(e: PointerEvent) {
       if (!drag || mode === 'cardboard') return
+      if (Math.abs(e.clientX - px) + Math.abs(e.clientY - py) > 2) moved = true
       yaw -= (e.clientX - px) * 0.004
       pitch = Math.max(-0.6, Math.min(0.6, pitch - (e.clientY - py) * 0.004))
       px = e.clientX
@@ -236,7 +200,7 @@ export default function Courtyard({ mode, phase, caption, onCommand, onError }: 
     }
     function up(e: PointerEvent) {
       drag = false
-      if (mode === 'cardboard') return
+      if (mode === 'cardboard' || moved) return
       const rect = renderer.domElement.getBoundingClientRect()
       pointer.set(
         ((e.clientX - rect.left) / rect.width) * 2 - 1,
@@ -312,6 +276,8 @@ export default function Courtyard({ mode, phase, caption, onCommand, onError }: 
     }
     renderer.domElement.addEventListener('webglcontextlost', lost)
     return () => {
+      disposed = true
+      scene.background = null
       cancelAnimationFrame(frame)
       observer.disconnect()
       window.removeEventListener('deviceorientation', orientation)
@@ -336,11 +302,10 @@ export default function Courtyard({ mode, phase, caption, onCommand, onError }: 
       className={`courtyard ${mode === 'cardboard' ? 'stereo' : ''}`}
       ref={host}
       role="img"
-      aria-label="Sân đình 3D. Nhân vật hướng dẫn minh họa."
+      aria-label="Sân đình 3D với tranh nền và nhân vật minh họa AI."
     >
       <span className="scene-caption">
-        KHÔNG GIAN MINH HỌA ·{' '}
-        {mode === 'cardboard' ? 'NHÌN VÀO NÚT TRONG 1,5 GIÂY' : 'KÉO ĐỂ NHÌN QUANH'}
+        MINH HỌA AI · {mode === 'cardboard' ? 'NHÌN VÀO NÚT TRONG 1,5 GIÂY' : 'KÉO ĐỂ NHÌN QUANH'}
       </span>
       {fps !== null && <span className="scene-fps">{fps} FPS</span>}
     </div>

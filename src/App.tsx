@@ -139,7 +139,7 @@ function Shell() {
           </div>
           <div className="version-line">
             <span>BẢN TRẢI NGHIỆM</span>
-            <span>v1.0</span>
+            <span>v1.1</span>
           </div>
         </div>
       </aside>

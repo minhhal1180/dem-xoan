@@ -12,8 +12,8 @@ export default function Explore() {
       />
       <section className="discovery-hero">
         <img
-          src={`${import.meta.env.BASE_URL}media/hatxoan.jpg`}
-          alt="Cộng đồng biểu diễn Hát Xoan tại Việt Trì"
+          src={`${import.meta.env.BASE_URL}media/generated/hero.webp`}
+          alt="Tranh minh họa AI: kép và đào trong sân đình đêm hội"
           width="600"
           height="480"
         />
@@ -32,11 +32,11 @@ export default function Explore() {
         </div>
       </section>
       <p className="attribution">
-        Ảnh: Tungdino1997 / Wikimedia Commons ·{' '}
-        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">
-          CC BY-SA 4.0
+        Tranh minh họa AI · Nhân vật hư cấu. Xem{' '}
+        <a href={catalog[1].sourceUrl} target="_blank" rel="noreferrer">
+          ảnh tư liệu của Tungdino1997 (CC BY-SA 4.0)
         </a>{' '}
-        · Ảnh gốc, bố cục hiển thị được điều chỉnh.
+        tại Wikimedia Commons.
       </p>
       <div className="feature-grid section-block">
         {[

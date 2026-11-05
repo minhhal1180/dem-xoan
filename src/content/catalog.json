@@ -15,7 +15,7 @@
     "kind": "image",
     "author": "Tungdino1997",
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hatxoan.jpg",
-    "rights": "CC BY-SA 4.0. Ảnh giữ nguyên, chỉ điều chỉnh cách hiển thị bằng CSS. https://creativecommons.org/licenses/by-sa/4.0/",
+    "rights": "CC BY-SA 4.0. Liên kết ảnh tư liệu tại nguồn; ảnh minh họa AI trong ứng dụng được ghi nhận riêng. https://creativecommons.org/licenses/by-sa/4.0/",
     "reviewed": true,
     "version": 1
   },
@@ -37,6 +37,16 @@
     "sourceUrl": "",
     "rights": "Âm tổng hợp bằng Web Audio. Bài luyện minh họa, không phải câu Hát Xoan.",
     "reviewed": true,
+    "version": 1
+  },
+  {
+    "id": "generated-courtyard-art",
+    "title": "Tranh sân đình và hai nhân vật hướng dẫn minh họa AI",
+    "kind": "image",
+    "author": "Dự án Đêm Xoan Không Tắt · tạo bằng imagegen",
+    "sourceUrl": "",
+    "rights": "Hình ảnh sinh bằng AI cho giao diện và texture Three.js. Nhân vật hư cấu, không đại diện nghệ nhân thật; không dùng làm ảnh tư liệu hoặc phục dựng di tích. Quyền sử dụng theo điều khoản của công cụ tạo ảnh; không gán giấy phép của Wikimedia cho các ảnh này.",
+    "reviewed": false,
     "version": 1
   }
 ]

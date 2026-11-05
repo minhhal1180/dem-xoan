@@ -1,5 +1,16 @@
 # Kiểm chứng và giới hạn
 
+## Bổ sung v1.1 — hình ảnh và iOS
+
+- 8 unit tests: bổ sung dữ liệu cảm biến hợp lệ, góc xoay iOS cũ/mới, AudioContext bị `interrupted` và tạo lại sau khi giải phóng.
+- 14 browser checks đạt trên máy phát triển: 11 Chromium và 3 WebKit mô phỏng iPhone; bài kiểm tra API live chạy riêng bằng `TEST_LIVE_API=1`.
+- WebKit trên Windows không cung cấp `AudioContext`, `AudioWorkletNode` hoặc `mediaDevices`. Kiểm tra tương ứng xác minh lỗi phục hồi được, **không xác nhận thu/phát âm thanh thật trên Safari**. Workflow Linux cũng cài WebKit để chạy nhánh Web Audio nếu bản WebKit cung cấp API.
+- Chromium tiếp tục kiểm tra đường PCM → AudioWorklet → Worker → IndexedDB và offline. Bộ ảnh WebP được xác minh tải từ cache khi đã ngắt mạng.
+- Bốn ảnh WebP tổng 694.336 byte; hai nhân vật giữ kênh alpha. Gói precache sau build khoảng 1,94 MiB, chưa phải số đo thời gian tải trên điện thoại.
+- Đã điều chỉnh giao diện và quyền cho iOS; nghiệm thu micro, cảm biến, stereo, cài PWA và hiệu năng trên iPhone thật vẫn chưa thực hiện. Không coi thiết bị mô phỏng là nghiệm thu kính giấy.
+
+Tham chiếu hành vi trình duyệt: [WebKit: yêu cầu quyền cảm biến từ tương tác](https://bugs.webkit.org/show_bug.cgi?id=201676), [WebKit: AudioContext interrupted](https://bugs.webkit.org/show_bug.cgi?id=273511).
+
 ## Đã kiểm tra tự động trong môi trường phát triển
 
 - TypeScript strict và production build.

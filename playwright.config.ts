@@ -12,12 +12,18 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+      testIgnore: /ios\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
         launchOptions: {
           args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'],
         },
       },
+    },
+    {
+      name: 'webkit-iphone',
+      testMatch: /ios\.spec\.ts/,
+      use: { ...devices['iPhone 13'], defaultBrowserType: 'webkit' },
     },
   ],
   webServer: {

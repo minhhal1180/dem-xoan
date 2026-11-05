@@ -29,7 +29,7 @@ jobs:
         env:
           VITE_BASE_PATH: /dem-xoan/
           VITE_API_URL: ${{ vars.VITE_API_URL }}
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:e2e
       - uses: actions/upload-artifact@v4
         if: failure()

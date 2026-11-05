@@ -18,7 +18,8 @@ export class AudioEngine {
 
   async unlock() {
     if (!this.context || this.context.state === 'closed') this.context = new AudioContext()
-    if (this.context.state === 'suspended') await this.context.resume()
+    // Safari can report "interrupted" after a permission prompt or app switch.
+    if (this.context.state !== 'running') await this.context.resume()
     return this.context
   }
   async openMicrophone() {
@@ -33,6 +34,8 @@ export class AudioEngine {
       video: false,
     })
     try {
+      // Opening the microphone may interrupt the output audio session on iOS.
+      if (ctx.state !== 'running') await ctx.resume()
       await ctx.audioWorklet.addModule(workletUrl)
       this.source = ctx.createMediaStreamSource(this.stream)
       this.analyser = ctx.createAnalyser()

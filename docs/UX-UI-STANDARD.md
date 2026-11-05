@@ -87,3 +87,10 @@ Hành động xóa tiến bộ cần xác nhận vì xóa cả local và dữ li
 7. Chạy typecheck, unit/API tests và Playwright trước deploy. Kính và hiệu năng điện thoại phải có biên bản kiểm tra thiết bị thật; kiểm thử desktop không thay thế.
 
 Ảnh tham chiếu bản triển khai nằm trong `docs/screenshots/`. Quy chuẩn này ưu tiên tính nhất quán và khả năng dùng được; không xác nhận rằng toàn bộ tiêu chí accessibility hay kính giấy đã được nghiệm thu trên thiết bị thật.
+
+## Hình ảnh và iOS — bổ sung v1.1
+
+- Dùng cùng một bộ tranh imagegen cho hero, khám phá và texture sân đình: bút pháp minh họa, xanh đêm, gạch nung, vàng ấm. Không trộn ảnh sinh mang vẻ tư liệu với tuyên bố về nghệ nhân hoặc di tích có thật. Ghi rõ minh họa AI tại ngữ cảnh sử dụng; danh mục nguồn tách riêng ảnh tư liệu. Prompt và đường dẫn gốc ở [IMAGE-ASSETS.md](IMAGE-ASSETS.md).
+- Giữ bộ icon Lucide và biểu trưng SVG để đồng bộ nét; không thay icon thao tác bằng ảnh sinh. Ảnh hero có kích thước khai báo chống nhảy bố cục. Texture tối đa 1774 px; ảnh nhân vật giữ alpha.
+- Nút thoát kính và hướng dẫn nằm trong vùng an toàn của màn hình có tai thỏ; chế độ kính dùng CSS phủ màn hình nếu trình duyệt không hỗ trợ Fullscreen API. Không chặn sử dụng bằng yêu cầu cài PWA.
+- Cấp quyền cảm biến từ thao tác chạm; không tự mở âm thanh khi tải trang. Khi chuyển nền, dừng thu, bỏ bản thu tạm và chỉ bắt đầu lượt mới sau thao tác của người học. Từ chối quyền phải dẫn về luồng màn hình dùng được.

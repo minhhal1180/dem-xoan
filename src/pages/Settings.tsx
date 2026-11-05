@@ -79,6 +79,11 @@ export default function Settings() {
           <p className="small muted">
             Bạn luôn có thể mở ứng dụng trực tiếp bằng đường dẫn; không bắt buộc cài.
           </p>
+          <p className="small muted">
+            Trên iPhone/iPad, dùng Safari và chạm nút nghe mẫu để bật âm thanh. Kính giấy cần cho
+            phép “Chuyển động & hướng”, xoay ngang thủ công, rồi chạm “Dùng kính giấy” trong sân
+            đình. Nếu không có cảm biến, tiếp tục học trên màn hình.
+          </p>
         </section>
         <section className="panel settings-panel">
           <span className="feature-icon sage">
@@ -166,7 +171,8 @@ export default function Settings() {
         <h2>Nguồn tư liệu và ghi nhận</h2>
         <p className="muted">
           Phần giới thiệu được biên soạn lại cho người mới tìm hiểu. Nhân vật trong cảnh là hình
-          minh họa, không đại diện cho nghệ nhân cụ thể.
+          minh họa AI, không đại diện cho nghệ nhân cụ thể. Tranh nền và nhân vật trong sân đình là
+          hình ảnh do dự án tạo bằng imagegen; không phải ảnh tư liệu hay mô hình phục dựng di tích.
         </p>
         <div className="source-list">
           {catalog.map((item) => (

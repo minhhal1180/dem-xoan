@@ -1271,8 +1271,8 @@ main:focus {
 }
 .cardboard-page .scene-toolbar {
   position: absolute;
-  right: 10px;
-  top: 5px;
+  right: max(10px, env(safe-area-inset-right));
+  top: max(5px, env(safe-area-inset-top));
   border: 0;
 }
 .cardboard-page .scene-toolbar > span {
@@ -1294,7 +1294,8 @@ main:focus {
   left: 0;
   right: 0;
   background: #10232caa;
-  padding: 5px 15px;
+  padding: 5px max(15px, env(safe-area-inset-right)) max(5px, env(safe-area-inset-bottom))
+    max(15px, env(safe-area-inset-left));
   text-align: center;
   color: #d5d7c4;
   font-size: 9px;

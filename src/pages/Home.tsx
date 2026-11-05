@@ -57,8 +57,8 @@ export default function Home() {
               <AudioLines size={21} />
             </span>
             <div>
-              <strong>Nghệ nhân hát trước, bạn đáp lại.</strong>
-              <span>Cảm hứng cho hành trình học di sản</span>
+              <strong>Lắng nghe trước, cùng nhau đáp lại.</strong>
+              <span>Tranh minh họa AI · Nhân vật hư cấu</span>
             </div>
             <span className="sound-bars">
               <i />

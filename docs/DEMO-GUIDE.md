@@ -2,10 +2,10 @@
 
 ## Trước buổi trình diễn
 
-1. Mở ứng dụng bằng Chrome Android hoặc trình duyệt desktop. Dùng HTTPS; không mở `index.html` bằng file explorer.
+1. Mở ứng dụng bằng Chrome Android, Safari iPhone/iPad hoặc trình duyệt desktop. Dùng HTTPS; không mở `index.html` bằng file explorer. Với iPhone, chạm nút nghe mẫu để bật âm thanh; có thể thêm vào màn hình chính từ menu Chia sẻ.
 2. Vào **Thiết bị & tư liệu → Chuẩn bị demo offline**. Chờ thông báo đã xác minh đủ tài nguyên. Nếu chưa xác minh, không khẳng định offline sẵn sàng.
 3. Chuẩn bị tai nghe có dây và chỗ yên tĩnh. Kiểm tra micro; thử một lượt trước khi lên sân khấu.
-4. Nếu dùng kính: Android phải có cảm biến, cấp quyền micro/cảm biến trước, xoay ngang. Có người hỗ trợ, ngồi ổn định. Nếu khó chịu hoặc hướng nhìn không hoạt động, dùng màn hình.
+4. Nếu dùng kính: Android hoặc iPhone phải có cảm biến, cấp quyền micro/cảm biến trước, xoay ngang thủ công. Trên iOS cho phép “Chuyển động & hướng”. Sau khi vào sân đình, chạm “Dùng kính giấy” để kích hoạt âm thanh và cảm biến trong trang luyện. Có người hỗ trợ, ngồi ổn định. Nếu khó chịu hoặc hướng nhìn không hoạt động, dùng màn hình. Chưa nghiệm thu kính trên điện thoại vật lý.
 5. Không dùng số liệu lớp giả lập làm kết quả thực nghiệm.
 
 ## Kịch bản 5–10 phút

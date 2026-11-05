@@ -67,6 +67,14 @@ test('verified offline package includes lazy 3D, worker, sources and class', asy
   await page.getByRole('button', { name: 'Chuẩn bị demo offline' }).click()
   await expect(page.getByText(/Đã xác minh đủ tài nguyên/)).toBeVisible({ timeout: 40000 })
   await context.setOffline(true)
+  for (const name of ['hero', 'environment', 'kep', 'dao']) {
+    expect(
+      await page.evaluate(async (asset) => {
+        const response = await fetch(`./media/generated/${asset}.webp`)
+        return response.ok && (await response.blob()).size > 1000
+      }, name),
+    ).toBe(true)
+  }
   await page.goto('./#/giao-vien')
   await expect(page.locator('tbody tr')).toHaveCount(30)
   await page.goto('./#/san-dinh')
