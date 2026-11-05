@@ -156,6 +156,7 @@ def create_server(db_path, origins, host='127.0.0.1', port=8107):
                         self.body()
                         token, owner = secrets.token_urlsafe(32), str(uuid.uuid4())
                         conn.execute('INSERT INTO identities VALUES (?,?,?)', (owner, hashlib.sha256(token.encode()).hexdigest(), datetime.now().astimezone().isoformat()))
+                        conn.commit()
                         return self.send_json(201, {'id': owner, 'token': token})
                     owner = self.owner(conn)
                     if path == '/v1/progress':
@@ -166,6 +167,7 @@ def create_server(db_path, origins, host='127.0.0.1', port=8107):
                         if method == 'DELETE':
                             conn.execute('DELETE FROM attempts WHERE owner_id=?', (owner,))
                             conn.execute('DELETE FROM learning_sessions WHERE owner_id=?', (owner,))
+                            conn.commit()
                             return self.send_json(204)
                     parts = path.strip('/').split('/')
                     if method != 'PUT' or len(parts) != 3 or parts[0] != 'v1' or parts[1] not in ('sessions', 'attempts') or not valid_uuid(parts[2]):
@@ -184,6 +186,7 @@ def create_server(db_path, origins, host='127.0.0.1', port=8107):
                         if not parent or parent[0] != owner:
                             raise APIError(403, 'Session not permitted')
                         conn.execute('INSERT INTO attempts VALUES (?,?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload, session_id=excluded.session_id', (item_id, owner, clean['sessionId'], json.dumps(clean, allow_nan=False)))
+                    conn.commit()
                     self.send_json(200, {'id': item_id, 'saved': True})
             except APIError as error:
                 self.send_json(error.status, {'error': error.message})
