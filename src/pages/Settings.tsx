@@ -95,12 +95,13 @@ export default function Settings() {
               checked={enabled}
               disabled={loading || !apiUrl}
               onChange={(e) => {
-                if (e.target.checked)
+                if (e.target.checked) {
+                  setEnabled(true)
                   void action(
                     enableCloud,
                     'Đã bật lưu online. Các kết quả trên máy đã được đồng bộ.',
                   )
-                else {
+                } else {
                   disableCloud()
                   setEnabled(false)
                   setMessage(

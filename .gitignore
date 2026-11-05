@@ -13,3 +13,4 @@ __pycache__/
 backend/api.env
 backend/cloudflared
 *.log
+artifacts/

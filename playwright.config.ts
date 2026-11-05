@@ -4,7 +4,7 @@ export default defineConfig({
   fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
   use: {
-    baseURL: 'http://127.0.0.1:4173/dem-xoan/',
+    baseURL: process.env.TEST_BASE_URL || 'http://127.0.0.1:4173/dem-xoan/',
     headless: true,
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',

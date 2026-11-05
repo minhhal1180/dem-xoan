@@ -10,7 +10,15 @@
 - Browser offline: xác minh cache, ngắt mạng, mở lazy route lớp mẫu và sân đình, thu và phân tích khi offline.
 - Responsive: kiểm tra document không tràn ở 360/390/768/1024/1440 px trên cả bảy trang chính.
 
-Kết quả thực tế cuối cùng và URL triển khai được cập nhật ở cuối quá trình phát hành. Các lệnh tái lập nằm trong README và CI.
+Kết quả kiểm tra ngày 05/11/2026: 5 unit tests, 2 API tests và 11 browser tests thành công trên máy phát triển; bộ kiểm tra CI Ubuntu cũng đã thành công. Kiểm tra accessibility tự động trên sáu trang nội dung theo nhóm WCAG A/AA của axe không phát hiện violation trong các trạng thái đã quét; không thay thế audit thủ công toàn bộ.
+
+Đã triển khai GitHub Pages tại https://minhhal1180.github.io/dem-xoan/ và API systemd tại https://sv28.bcse-vju.com/v1/health. Nginx kiểm tra cấu hình thành công; trang chủ VPS hiện có vẫn trả HTTP 200.
+
+Kiểm thử tích hợp HTTPS từ trình duyệt đã thành công: đồng ý lưu online → tạo phiên ẩn danh → thu âm bằng thiết bị micro giả lập Chromium qua AudioWorklet → phân tích Worker → đồng bộ kết quả → hiển thị Đã đồng bộ → xóa dữ liệu trên API và local. Đây là kiểm chứng đường đi dữ liệu, không phải kiểm chứng chất lượng đánh giá giọng hát thật.
+
+Gói precache sau build sạch khoảng 1,29 MiB. JavaScript khởi động khoảng 129 kB gzip, chunk cảnh 3D khoảng 138 kB gzip. `npm audit` hiện không báo lỗ hổng trong cây dependency đã khóa. Các số bundle là kích thước build, không phải phép đo độ trễ mạng/thiết bị.
+
+Các lệnh tái lập nằm trong README và CI. Để chạy kiểm thử kết nối VPS: đặt `TEST_LIVE_API=1` và chạy `npx playwright test live.spec.ts`; có thể đặt `TEST_BASE_URL=https://minhhal1180.github.io/dem-xoan/` để chạy trên bản công khai.
 
 ## Chưa được coi là nghiệm thu
 

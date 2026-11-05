@@ -30,6 +30,8 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
+Kiểm thử API thật từ giao diện: đặt `TEST_LIVE_API=1`, chạy `npx playwright test live.spec.ts`. Mặc định CI bỏ qua test này để không tạo dữ liệu trên VPS. Dùng `TEST_BASE_URL` để chỉ định bản GitHub Pages thay cho preview local.
+
 `npm run preview` phục vụ bản build và service worker. Dev server không được dùng làm bằng chứng PWA offline. `npm run icons` tạo lại icon PNG từ SVG nội bộ.
 
 ## Cấu trúc

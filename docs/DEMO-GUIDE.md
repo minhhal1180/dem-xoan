@@ -30,4 +30,4 @@
 - API chưa kết nối: không ảnh hưởng thu/chấm; vào Thiết bị & tư liệu để thử đồng bộ sau.
 - Không có tiếng/điểm trống: kiểm tra đầu vào và ngắt rõ giữa các tiếng. Chấm âm tổng hợp chỉ là minh họa kỹ thuật.
 
-Ảnh chụp trong `docs/screenshots` chỉ minh họa giao diện. Video trình diễn thật cần tự ghi từ thiết bị sau khi nghiệm thu; dự án không có video quay người dùng thật hoặc nghệ nhân giả lập.
+Ảnh chụp trong `docs/screenshots` chỉ minh họa giao diện. `docs/demo/interface-demo.webm` là video thao tác giao diện tự động, không có âm thanh, có nhãn phân biệt trên hình; dùng làm tư liệu dự phòng khi giới thiệu sản phẩm. Có thể tạo lại bằng `node scripts/record-demo.mjs` khi preview đang chạy. Video trình diễn thật cần tự ghi từ thiết bị sau khi nghiệm thu; dự án không có video quay người dùng thật hoặc nghệ nhân giả lập.
