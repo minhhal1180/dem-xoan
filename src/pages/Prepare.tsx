@@ -184,7 +184,14 @@ export default function Prepare() {
               <Mic size={17} />
               {testing ? 'Nói hoặc ngân thử…' : mic ? 'Kiểm tra lại micro' : 'Kiểm tra micro'}
             </Button>
-            <div className="mic-meter" aria-label="Mức âm lượng micro">
+            <div
+              className="mic-meter"
+              role="meter"
+              aria-label="Mức âm lượng micro"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(level * 100)}
+            >
               <span style={{ width: `${Math.max(3, level * 100)}%` }} />
             </div>
             <span className="small muted">
